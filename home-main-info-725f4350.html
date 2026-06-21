@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>再次到访 · 华体会翻阅笔记</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #f7fafc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .page-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* 网格卡片背景装饰，保持干净 */
+        .grid-card-bg {
+            position: relative;
+        }
+        .grid-card-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(20, 184, 166, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20, 184, 166, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2.8rem;
+            padding: 2rem 0 1rem;
+            border-bottom: 2px solid rgba(20, 184, 166, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subhead {
+            font-size: 1.1rem;
+            color: #475569;
+            border-left: 4px solid #14b8a6;
+            padding-left: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .article-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.04);
+            padding: 1.8rem 1.6rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid #e9f0f0;
+            transition: box-shadow 0.2s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .article-card:hover {
+            box-shadow: 0 8px 24px rgba(20, 184, 166, 0.08);
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .dot-sep {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: #94a3b8;
+            border-radius: 50%;
+        }
+
+        .guide {
+            font-size: 0.95rem;
+            color: #334155;
+            margin: 1.2rem 0 0.8rem;
+            padding: 0.8rem 1rem;
+            background: #f1f9f8;
+            border-radius: 18px;
+            border-left: 5px solid #14b8a6;
+        }
+
+        .guide a {
+            color: #0d9488;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: rgba(20, 184, 166, 0.3);
+            transition: text-decoration-color 0.15s;
+        }
+
+        .guide a:hover {
+            text-decoration-color: #0d9488;
+        }
+
+        .body-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .body-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-quote {
+            background: #eef7f5;
+            padding: 0.9rem 1.2rem;
+            border-radius: 20px;
+            margin: 1.5rem 0 1.2rem;
+            position: relative;
+            font-style: normal;
+            color: #1e293b;
+            box-shadow: inset 0 0 0 1px rgba(20, 184, 166, 0.12);
+        }
+
+        .highlight-quote::before {
+            content: '“';
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #14b8a6;
+            opacity: 0.3;
+            position: absolute;
+            left: 0.5rem;
+            top: -0.1rem;
+        }
+
+        .faq-mini {
+            background: #fafdfd;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-top: 2rem;
+            border: 1px solid #ddeff0;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            color: #0f3b3a;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            font-size: 1rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-mini details:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-mini p {
+            font-size: 0.95rem;
+            color: #334155;
+            padding: 0.5rem 0 0.2rem 1rem;
+            border-left: 2px solid #9ad4cb;
+            margin-top: 0.3rem;
+        }
+
+        .visit-note {
+            margin-top: 2rem;
+            padding: 1rem 0 0.2rem;
+            border-top: 1px solid #dde5e5;
+            font-size: 0.9rem;
+            color: #54656f;
+            text-align: center;
+        }
+
+        .visit-note a {
+            color: #0f766e;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7a8e99;
+            padding: 1rem 0 0.2rem;
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 1.2rem 0.8rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .article-card { padding: 1.3rem; }
+            .article-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap grid-card-bg">
+    <div class="hero">
+        <h1>华体会·阅读存档</h1>
+        <div class="subhead">再次翻开 · 收藏笔记</div>
+    </div>
+
+    <!-- 文章卡片 -->
+    <div class="article-card">
+        <div class="article-title">回访与延续</div>
+        <div class="article-meta">
+            <span>整理于 2025</span>
+            <span class="dot-sep"></span>
+            <span>碎片归档</span>
+        </div>
+
+        <div class="body-text">
+            <p>有些页面，值得反复打开。不是因为新鲜，而是每次回去都能找到上次留下的线索。最近又把<a href="https://home-main-hth.com.cn" style="color:#0d9488; font-weight:500; text-decoration:underline; text-underline-offset:3px;">华体会</a>的首页调出来看了一遍，发现自己还是习惯从那里开始梳理思路。</p>
+
+            <p>很多站点第一次看是匆匆掠过，第二次才会注意到原本忽略的细节。就像前几天重新翻到右侧的导航分组，才发现自己之前一直没点开过“归档”那一栏。这种「再次发现」的体验，其实比初次浏览更踏实。</p>
+
+            <div class="highlight-quote">
+                收藏夹里存的不只是地址，更是自己曾经判断「这个值得再回来」的瞬间。
+            </div>
+
+            <p>所以我习惯把常读的页面固定到浏览器标签栏，或者记在笔记软件里。每次打开都像翻开一本旧书，书页边缘已经起了毛，但内容反而更清晰。对于像<a href="https://home-main-hth.com.cn" style="color:#0d9488; font-weight:500; text-decoration:underline; text-underline-offset:3px;">华体会</a>这样的站点，我干脆把链接贴在桌面小组件上，随手就能点进去。</p>
+
+            <p>持续关注不等于每天刷新。更像是在需要的时候，知道去哪里找。把网址收好，把阅读节奏放慢，慢慢也就养成了回访的习惯。下面几个小问答，算是自己整理时留下的备注。</p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>为什么要重复访问同一个站点？</summary>
+                <p>第一次往往只能看到表层结构，第二次才会注意到内容之间的关联。而且站点会微调布局，回访时常能发现之前没留意的栏目。</p>
+            </details>
+            <details>
+                <summary>怎样有效地「收藏」一个页面？</summary>
+                <p>我的做法是：在书签里加一行简短备注（比如“2025-04 再次阅读”），或者在笔记里复制一句当时觉得有用的话。这样下次打开时能快速回到上下文里。</p>
+            </details>
+            <details>
+                <summary>持续关注会不会变成信息负担？</summary>
+                <p>取决于频率。我一般间隔一到两周回访一次，不设提醒，纯粹凭兴趣。如果某次觉得没新东西，就暂停一段时间，不必强求。</p>
+            </details>
+        </div>
+
+        <!-- 自然的访问句 -->
+        <div class="visit-note">
+            如你需要，可直接前往 <a href="https://home-main-hth.com.cn">华体会</a> 首页，页面结构清晰，适合慢慢翻阅。
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <span>— 以此为记 · 保持翻阅 —</span>
+    </div>
+</div>
+</body>
+</html>
