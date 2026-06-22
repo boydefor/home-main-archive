@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>HLTV 官方介绍 · 快速识别与入门引导</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, "Helvetica Neue", sans-serif;
+            background: #f3f5f7;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 0 1.25rem 3rem;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* ---- 顶部导航 ---- */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #dce2e8;
+            background: #f3f5f7;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        .top-nav .logo {
+            font-weight: 600;
+            font-size: 1.35rem;
+            letter-spacing: -0.3px;
+            color: #0f1c2e;
+        }
+
+        .top-nav .logo span {
+            color: #3b6ea5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.4rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2b4059;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #3b6ea5;
+            color: #0b1b2b;
+        }
+
+        /* ---- Hero 区域 ---- */
+        .hero {
+            margin-top: 2.2rem;
+            padding: 2.5rem 2rem;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e6ecf1;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: #142433;
+            margin-bottom: 0.9rem;
+        }
+
+        .hero p {
+            font-size: 1.08rem;
+            max-width: 780px;
+            color: #2b4059;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #eef3f9;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1f466a;
+            border: 1px solid #d5e0ec;
+        }
+
+        /* ---- 核心介绍卡片 ---- */
+        .intro-card {
+            margin-top: 2rem;
+            padding: 2rem 2rem 2.2rem;
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e6ecf1;
+        }
+
+        .intro-card h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #142433;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .intro-card h2 small {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #5f748a;
+        }
+
+        .intro-card p {
+            color: #1e2e40;
+            margin-bottom: 0.6rem;
+        }
+
+        .intro-card .highlight-link {
+            margin-top: 0.8rem;
+            display: inline-block;
+        }
+
+        .intro-card .highlight-link a {
+            color: #1f5d8f;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #acc4db;
+            transition: 0.2s;
+        }
+
+        .intro-card .highlight-link a:hover {
+            border-bottom-style: solid;
+            color: #0b3860;
+        }
+
+        /* ---- 场景三模块 (卡片网格) ---- */
+        .scenes-grid {
+            margin-top: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            padding: 1.8rem 1.5rem 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e6ecf1;
+            transition: 0.2s;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 20, 40, 0.04);
+            border-color: #cbd6e2;
+        }
+
+        .scene-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1b3147;
+            margin-bottom: 0.6rem;
+        }
+
+        .scene-card p {
+            font-size: 0.96rem;
+            color: #324c65;
+            margin-bottom: 0.4rem;
+        }
+
+        .scene-card .meta {
+            font-size: 0.8rem;
+            color: #687e97;
+            margin-top: 0.8rem;
+            border-top: 1px solid #e9eef3;
+            padding-top: 0.7rem;
+        }
+
+        /* ---- 常见说明 / FAQ 摘要 ---- */
+        .faq-section {
+            margin-top: 2.5rem;
+            padding: 2rem 2rem 2.2rem;
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e6ecf1;
+        }
+
+        .faq-section h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #142433;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .faq-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: #1f3a54;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-item .a {
+            font-size: 0.93rem;
+            color: #3a5772;
+        }
+
+        .faq-item .a a {
+            color: #1b5c8d;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-style: dotted;
+        }
+
+        .faq-item .a a:hover {
+            text-decoration-style: solid;
+        }
+
+        /* ---- 提示 / 补充 ---- */
+        .note-box {
+            margin-top: 2rem;
+            background: #f9fbfd;
+            border-left: 4px solid #7b9bc0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 16px 16px 0;
+            font-size: 0.93rem;
+            color: #1f3c57;
+            border: 1px solid #e0e9f2;
+            border-left-width: 4px;
+        }
+
+        .note-box a {
+            color: #1f5d8f;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* ---- 页脚（轻量） ---- */
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #60768d;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #dce4ec;
+        }
+
+        /* ---- 响应式微调 ---- */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.55rem;
+            }
+            .hero {
+                padding: 1.8rem 1.2rem;
+            }
+            .intro-card,
+            .faq-section {
+                padding: 1.5rem 1.2rem;
+            }
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0 0.8rem 2rem;
+            }
+            .hero h1 {
+                font-size: 1.35rem;
+            }
+            .scenes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="logo"><span>◉</span> HLTV 识站</div>
+        <div class="nav-links">
+            <a href="#">导览</a>
+            <a href="#">场景</a>
+            <a href="#">说明</a>
+            <a href="#">更多</a>
+        </div>
+    </nav>
+
+    <!-- Hero 区域：快速识别网站用途 -->
+    <div class="hero">
+        <h1>快速识别：<a href="https://app-hltv.com" style="color: #1f5d8f; text-decoration: underline; text-underline-offset: 3px;">hltv官网</a> 是用来做什么的？</h1>
+        <p>无论你是刚接触这个站点，还是希望确认它的核心定位，以下内容帮你在一分钟内建立清晰认知。它并非一个泛娱乐社区，而是一个围绕特定领域提供信息聚合与数据服务的专业平台。</p>
+        <span class="tagline">⚡ 轻导航 · 知识型 · 场景化</span>
+    </div>
+
+    <!-- 核心介绍：从用途角度展开 -->
+    <div class="intro-card">
+        <h2>它是信息诊断与参考的起点 <small>· 非官方但长期维护</small></h2>
+        <p>很多用户第一次打开 <a href="https://app-hltv.com" style="color: #1f5d8f; text-decoration: underline; text-underline-offset: 2px;">hltv官网</a>，会好奇它究竟提供什么。简单来说，它整合了某一垂直领域内的赛事动态、队伍数据、选手统计以及历史记录，适合希望快速查阅事实、对比信息或追踪趋势的人。</p>
+        <p>页面结构偏向工具属性：没有繁复的社交推送，而是以分类和列表为主。你可以把它看作一个轻量的信息枢纽，用于辅助判断或作为兴趣参考。</p>
+        <div class="highlight-link">
+            ▶ 了解更多，直接前往 <a href="https://app-hltv.com">hltv官网</a> 浏览当前内容。
+        </div>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="scenes-grid">
+        <div class="scene-card">
+            <h3>📊 赛况与数据回溯</h3>
+            <p>当你想查看某场近期对决的比分、地图记录或选手表现，这个平台能提供结构化列表与基础统计。适合赛后的快速复盘或对比。</p>
+            <div class="meta">典型场景 · 信息检索</div>
+        </div>
+        <div class="scene-card">
+            <h3>🏷️ 战队与选手档案</h3>
+            <p>需要了解一支队伍的阵容变动、近期战绩或某位选手的基础数据？页面按条目展示，方便横向参照。不包含主观评分，侧重事实陈列。</p>
+            <div class="meta">典型场景 · 资料查阅</div>
+        </div>
+        <div class="scene-card">
+            <h3>📅 赛事日历与动态</h3>
+            <p>关注 upcoming 赛事或正在进行的比赛？通过时间线或列表可快速掌握日程。适合规划观看节奏，或跟踪某一联赛的进度。</p>
+            <div class="meta">典型场景 · 日程追踪</div>
+        </div>
+    </div>
+
+    <!-- 常见说明 / FAQ 摘要 -->
+    <div class="faq-section">
+        <h2>常见疑问 · 快速说明</h2>
+        <div class="faq-item">
+            <div class="q">这个网站与官方赛事是什么关系？</div>
+            <div class="a">它是一个独立的第三方信息聚合站点，并非任何联赛或俱乐部的官方网站。数据来源为公开信息，主要用于参考和辅助了解。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">我是否需要注册才能使用？</div>
+            <div class="a">大部分浏览与查询功能无需登录。部分个性化功能可能需要账户，但基础的信息获取在 <a href="https://app-hltv.com">hltv官网</a> 上完全开放。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">页面上的数据更新频率如何？</div>
+            <div class="a">通常与相关赛事进程同步，赛后数小时内会有结果录入。但非实时直播，适合作为阶段性记录查看。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">移动端体验如何？</div>
+            <div class="a">页面采用响应式设计，在手机或平板浏览器上可自适应排版，核心功能均可正常浏览。</div>
+        </div>
+    </div>
+
+    <!-- 自然嵌入提示 / 补充说明 -->
+    <div class="note-box">
+        💡 <strong>使用建议：</strong> 如果你希望快速定位某支队伍近期的表现，或对比不同选手的数据，可以直接在 <a href="https://app-hltv.com">hltv官网</a> 中利用搜索或分类索引。首页通常展示最新动态和热门条目，适合作为浏览起点。
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        <span>基于公开信息整理 · 内容仅供参考</span>
+    </div>
+</div>
+</body>
+</html>
